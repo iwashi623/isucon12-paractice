@@ -10,14 +10,21 @@ bn:
 re:
 	make arestart
 	make nrestart
-	# make mrestart
-	ssh 54.65.171.13 -A "cd webapp && make mrestart"
+	make mrestart
+
+# アプリ､nginx､mysqlの再起動
+.PHONY: re-ssh-db
+re:
+	make arestart
+	make nrestart
+	# リフレッシュしたいDBのPrivate IPを指定
+	ssh 192.168.0.12 -A "cd webapp && make mrestart"
 
 # アプリの再起動
 .PHONY: arestart
 arestart:
-	sudo systemctl restart isupipe-go
-	sudo systemctl status isupipe-go
+	sudo systemctl restart isuports
+	sudo systemctl status isuports
 
 # nginxの再起動
 .PHONY: nrestart
@@ -61,31 +68,31 @@ pprof:
 # Goのビルド
 .PHONY: build
 build:
-	cd go && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o isupipe -ldflags "-s -w"
+	cd go && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o isuports .
 
 # Goのビルドと1台目へのGoのバイナリアップロード
 .PHONY: upload1
 upload1: build
-	ssh isucon@i1 'sudo systemctl stop isupipe-go'
-	scp ./go/isupipe isucon@i1:/home/isucon/webapp/go/isupipe
-	ssh isucon@i1 'sudo systemctl restart isupipe-go'
-	ssh isucon@i1 'sudo systemctl status isupipe-go'
+	ssh isucon@i1 'sudo systemctl stop isuports'
+	scp ./go/isuports isucon@i1:/home/isucon/webapp/go/
+	ssh isucon@i1 'sudo systemctl restart isuports'
+	ssh isucon@i1 'sudo systemctl status isuports'
 
 # Goのビルドと2台目へのGoのバイナリアップロード
 .PHONY: upload2
 upload2: build
-	ssh isucon@i2 'sudo systemctl stop isupipe-go'
-	scp ./go/isupipe isucon@i2:/home/isucon/webapp/go/isupipe
-	ssh isucon@i2 'sudo systemctl restart isupipe-go'
-	ssh isucon@i2 'sudo systemctl status isupipe-go'
+	ssh isucon@i2 'sudo systemctl stop isuports'
+	scp ./go/isuports isucon@i2:/home/isucon/webapp/go/
+	ssh isucon@i2 'sudo systemctl restart isuports'
+	ssh isucon@i2 'sudo systemctl status isuports'
 
 # Goのビルドと3台目へのGoのバイナリアップロード
 .PHONY: upload3
 upload3: build
-	ssh isucon@i3 'sudo systemctl stop isupipe-go'
-	scp ./go/isupipe isucon@i3:/home/isucon/webapp/go/isupipe
-	ssh isucon@i3 'sudo systemctl restart isupipe-go'
-	ssh isucon@i3 'sudo systemctl status isupipe-go'
+	ssh isucon@i3 'sudo systemctl stop isuports'
+	scp ./go/isuports isucon@i3:/home/isucon/webapp/go/
+	ssh isucon@i3 'sudo systemctl restart isuports'
+	ssh isucon@i3 'sudo systemctl status isuports'
 
 # 1台目､2台目､3台目へのGoのバイナリアップロード
 .PHONY:
