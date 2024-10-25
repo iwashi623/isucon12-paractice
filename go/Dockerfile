@@ -30,4 +30,4 @@ ENV GOPATH=/home/isucon/tmp/go
 ENV GOCACHE=/home/isucon/tmp/go/.cache
 
 # 実行コマンド
-CMD ["go", "run", "./cmd/isuports/main.go"]
+CMD ["isuports"]

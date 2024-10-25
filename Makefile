@@ -14,7 +14,7 @@ re:
 
 # アプリ､nginx､mysqlの再起動
 .PHONY: re-ssh-db
-re:
+re-ssh-db:
 	make arestart
 	make nrestart
 	# リフレッシュしたいDBのPrivate IPを指定
