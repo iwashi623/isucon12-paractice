@@ -24,6 +24,7 @@ USER isucon
 RUN mkdir -p /home/isucon/webapp/go
 WORKDIR /home/isucon/webapp/go
 COPY --chown=isucon:isucon ./ /home/isucon/webapp/go/
+RUN chmod +x /home/isucon/webapp/go/isuports
 
 # Goの環境変数を設定
 ENV GOPATH=/home/isucon/tmp/go
