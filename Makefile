@@ -11,6 +11,7 @@ re:
 	make arestart
 	make nrestart
 	make mrestart
+	echo "正常にMake reが完了しました"
 
 # アプリ､nginx､mysqlの再起動
 .PHONY: re-ssh-db
