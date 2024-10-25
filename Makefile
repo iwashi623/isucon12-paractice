@@ -71,7 +71,7 @@ pprof:
 # Goのビルド
 .PHONY: build
 build:
-	cd go && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o isuports .
+	cd go && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o isuports cmd/isuports/main.go
 
 # Goのビルドと1台目へのGoのバイナリアップロード
 .PHONY: upload1
