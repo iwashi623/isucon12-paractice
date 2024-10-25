@@ -29,20 +29,22 @@ arestart:
 # nginxの再起動
 .PHONY: nrestart
 nrestart:
-	sudo rm /var/log/nginx/access.log > /dev/null 2>&1
+	sudo touch /var/log/nginx/access.log
+	sudo rm /var/log/nginx/access.log
 	sudo systemctl reload nginx
 	sudo systemctl status nginx
 
 # mysqlの再起動
 .PHONY: mrestart
 mrestart:
-	sudo rm /var/log/mysql/slow.log > /dev/null 2>&1
-	sudo mysqladmin flush-logs -u isucon -pisucon
+	sudo touch /var/log/mysql/slow.log
+	sudo rm /var/log/mysql/slow.log
+	sudo mysqladmin flush-logs -proot
 	sudo systemctl restart mysql
 	sudo systemctl status mysql
-	echo "set global slow_query_log = 1;" | sudo mysql -u isucon -pisucon
-	echo "set global slow_query_log_file = '/var/log/mysql/slow.log';" | sudo mysql -u isucon -pisucon
-	echo "set global long_query_time = 0;" | sudo mysql -u isucon -pisucon
+	echo "set global slow_query_log = 1;" | sudo mysql -proot
+	echo "set global slow_query_log_file = '/var/log/mysql/slow.log';" | sudo mysql -proot
+	echo "set global long_query_time = 0;" | sudo mysql -proot
 
 # 分割後のMysqlの再起動(二代目でmrestartを実行する)
 # .PHONY: mrestart
