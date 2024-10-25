@@ -37,12 +37,12 @@ nrestart:
 .PHONY: mrestart
 mrestart:
 	sudo rm /var/log/mysql/slow.log
-	sudo mysqladmin flush-logs -pisucon
+	sudo mysqladmin flush-logs -u isucon -pisucon
 	sudo systemctl restart mysql
 	sudo systemctl status mysql
-	echo "set global slow_query_log = 1;" | sudo mysql -pisucon
-	echo "set global slow_query_log_file = '/var/log/mysql/slow.log';" | sudo mysql -pisucon
-	echo "set global long_query_time = 0;" | sudo mysql -pisucon
+	echo "set global slow_query_log = 1;" | sudo mysql -u isucon -pisucon
+	echo "set global slow_query_log_file = '/var/log/mysql/slow.log';" | sudo mysql -u isucon -pisucon
+	echo "set global long_query_time = 0;" | sudo mysql -u isucon -pisucon
 
 # 分割後のMysqlの再起動(二代目でmrestartを実行する)
 # .PHONY: mrestart
