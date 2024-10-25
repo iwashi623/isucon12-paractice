@@ -50,8 +50,7 @@ nalp:
 # mysqlのslowlogを見る
 .PHONY: pt
 pt:
-	@now=$$(date +%Y%m%d%H%M%S); \
-	sudo pt-query-digest /var/log/mysql/slow.log >> ~/pt$${now}.log
+	sudo pt-query-digest /var/log/mysql/slow.log > ~/pt.log
 
 # pprofを実行する
 .PHONY: pprof
@@ -116,12 +115,12 @@ pbnalp3:
 
 .PHONY: pbpt1
 pbpt1:
-	ssh isucon@i1 -A "now=$$(date +%Y%m%d%H%M%S); cd webapp && make pt && cat ~/pt$${now}.log" | pbcopy
+	ssh isucon@i1 -A "cd webapp && make pt && cat ~/pt.log" | pbcopy
 
 .PHONY: pbpt1
 pbpt2:
-	ssh isucon@i2 -A "now=$$(date +%Y%m%d%H%M%S); cd webapp && make pt && cat ~/pt$${now}.log" | pbcopy
+	ssh isucon@i2 -A "cd webapp && make pt && cat ~/pt.log" | pbcopy
 
 .PHONY: pbpt3
 pbpt3:
-	ssh isucon@i3 -A "now=$$(date +%Y%m%d%H%M%S); cd webapp && make pt && cat ~/pt$${now}.log" | pbcopy
+	ssh isucon@i3 -A "cd webapp && make pt && cat ~/pt.log" | pbcopy
