@@ -45,7 +45,7 @@ mrestart:
 # アプリのログを見る
 .PHONY: nalp
 nalp:
-	sudo cat /var/log/nginx/access.log | alp ltsv -m "/api/livestream/\d+/statistics","^/api/user/[\w\d]+$","/api/user/[\w\d]+/icon","/api/user/[\w\d]+/statistics","/api/livestream/\d+/ngwords","/api/livestream/\d+/reaction","/api/livestream/\d+/livecomment","/api/livestream/\d+/enter","/api/livestream/\d+/moderate","/api/livestream/\d+/report","/api/livestream/\d+/exit","/api/livestream/\d+$","/api/user/\d+$","/api/user/[\w\d]+/theme","/api/user/[\d\w]+/livestream","/assets/.+\.webp","/assets/.+\.js","/assets/.+\.css","/assets/.+\.png" --sort=sum --reverse
+	sudo cat /var/log/nginx/access.log | alp ltsv -m "/api/player/competition/[a-zA-Z0-9]+/ranking, /js/app.[a-zA-Z0-9]+.js, /api/player/player/[a-zA-Z0-9]+, /api/organizer/competition/[a-zA-Z0-9]+/score, /api/organizer/player/[a-zA-Z0-9]+/disqualified, /api/organizer/competition/[a-zA-Z0-9]+/finish" --sort=sum --reverse
 
 # mysqlのslowlogを見る
 .PHONY: pt
