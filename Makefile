@@ -29,14 +29,14 @@ arestart:
 # nginxの再起動
 .PHONY: nrestart
 nrestart:
-	sudo rm /var/log/nginx/access.log
+	sudo rm /var/log/nginx/access.log > /dev/null 2>&1
 	sudo systemctl reload nginx
 	sudo systemctl status nginx
 
 # mysqlの再起動
 .PHONY: mrestart
 mrestart:
-	sudo rm /var/log/mysql/slow.log
+	sudo rm /var/log/mysql/slow.log > /dev/null 2>&1
 	sudo mysqladmin flush-logs -u isucon -pisucon
 	sudo systemctl restart mysql
 	sudo systemctl status mysql
